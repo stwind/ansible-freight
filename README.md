@@ -1,7 +1,7 @@
 Erlang
 ========
 
-This role will install Erlang with [kerl](https://github.com/spawngrid/kerl).
+This role will install [freight](https://github.com/rcrowley/freight).
 
 Requirements
 ------------
