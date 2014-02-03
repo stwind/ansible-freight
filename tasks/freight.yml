@@ -1,0 +1,9 @@
+---
+- name: add freight official apt repository
+  apt_repository: repo="deb http://packages.rcrowley.org {{ansible_lsb['codename']}} main"
+
+- name: add freight repo gpg key
+  apt_key: url=http://packages.rcrowley.org/keyring.gpg
+
+- name: install freight
+  apt: pkg=freight state=installed update_cache=yes

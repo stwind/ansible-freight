@@ -1,0 +1,27 @@
+---
+- name: install gnupg rng-tools
+  apt: pkg={{item}} state=installed
+  with_items:
+    - gnupg
+    - rng-tools
+
+- name: start rngd
+  command: rngd -r /dev/urandom
+  ignore_errors: true
+
+- name: check key
+  shell: gpg --list-keys | grep {{freight_gpg_name}}
+  register: has_gpg_key
+  ignore_errors: true
+
+- name: gen gpg-key
+  shell: "gpg --gen-key --batch <<EOF \n
+          %echo Generating a basic OpenPGP key \n
+          Key-Type: RSA \n
+          Key-Length: 2048 \n
+          Name-Real: {{freight_gpg_name}} \n
+          Name-Email: {{freight_gpg_email}} \n
+          %commit \n
+          %echo done
+        EOF"
+  when: has_gpg_key.rc == 1

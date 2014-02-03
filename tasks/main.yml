@@ -1,0 +1,6 @@
+---
+- include: freight.yml
+- include: gpg.yml
+
+- name: create freight.conf
+  template: src=freight.conf.j2 dest=/etc/freight.conf owner=root

@@ -1,0 +1,4 @@
+---
+# defaults file for freight
+freight_gpg_name: freight
+freight_gpg_email: freight@example.com
