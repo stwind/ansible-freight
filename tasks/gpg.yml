@@ -5,16 +5,16 @@
     - gnupg
     - rng-tools
 
-- name: start rngd
+- name: start rngd for gpg key generation
   command: rngd -r /dev/urandom
   ignore_errors: true
 
-- name: check key
+- name: check if gpg key already exists
   shell: gpg --list-keys | grep {{freight_gpg_name}}
-  register: has_gpg_key
+  register: freight_has_gpg_key
   ignore_errors: true
 
-- name: gen gpg-key
+- name: generate gpg-key
   shell: "gpg --gen-key --batch <<EOF \n
           %echo Generating a basic OpenPGP key \n
           Key-Type: RSA \n
@@ -24,4 +24,4 @@
           %commit \n
           %echo done
         EOF"
-  when: has_gpg_key.rc == 1
+  when: freight_has_gpg_key.rc == 1
