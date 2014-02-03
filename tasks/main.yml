@@ -1,10 +1,4 @@
 ---
-- name: install dependencies from apt
-  apt: pkg={{item}} state=present
-  with_items:
-    - python-apt
-    - python-pycurl
-
 - include: freight.yml
 - include: gpg.yml
 
