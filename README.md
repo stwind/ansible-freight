@@ -1,4 +1,4 @@
-Erlang
+Freight
 ========
 
 This role will install [freight](https://github.com/rcrowley/freight).
