@@ -1,4 +1,10 @@
 ---
+- name: install dependencies from apt
+  apt: pkg={{item}} state=present
+  with_items:
+    - python-apt
+    - python-pycurl
+
 - name: add freight official apt repository
   apt_repository: repo="deb http://packages.rcrowley.org {{ansible_lsb['codename']}} main"
 
